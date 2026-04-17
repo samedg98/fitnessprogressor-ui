@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Dashboard.css";
+import WeeklyBarChart from "../components/WeeklyBarChart";
 
 export default function Dashboard() {
   const [weeklyTotals, setWeeklyTotals] = useState("--");
@@ -69,7 +70,8 @@ export default function Dashboard() {
         <div className="stat-card">
           <h3>Weekly Workouts</h3>
           <p>
-            {weeklyTotals} <span style={{ fontSize: "22px" }}>{trendArrow}</span>
+            {weeklyTotals}{" "}
+            <span style={{ fontSize: "22px" }}>{trendArrow}</span>
           </p>
         </div>
 
@@ -104,7 +106,7 @@ export default function Dashboard() {
             {lastFiveWorkouts.map((w, index) => (
               <li key={index}>
                 <strong>{w.exercise}</strong> — {w.sets} sets × {w.reps} reps @{" "}
-                {w.weight} lbs  
+                {w.weight} lbs
                 <br />
                 <small>{new Date(w.date).toLocaleDateString()}</small>
               </li>
@@ -114,9 +116,8 @@ export default function Dashboard() {
       </div>
 
       <div className="charts-container">
-        <h2>Charts (Coming Soon)</h2>
-        <div className="chart-placeholder">Weekly Bar Chart</div>
-        <div className="chart-placeholder">Exercise Pie Chart</div>
+        <h2>Weekly Workout Chart</h2>
+        <WeeklyBarChart weeklyTotals={weeklyTotals} />
       </div>
     </div>
   );
