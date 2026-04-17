@@ -18,8 +18,10 @@ export default function NavBar() {
         marginBottom: "20px",
       }}
     >
+      <Link to="/dashboard">Dashboard</Link>
       <Link to="/log">Log Workout</Link>
       <Link to="/history">History</Link>
+
       <button onClick={handleLogout} style={{ marginLeft: "auto" }}>
         Logout
       </button>
