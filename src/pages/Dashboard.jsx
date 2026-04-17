@@ -10,6 +10,8 @@ export default function Dashboard() {
   const [lastFiveWorkouts, setLastFiveWorkouts] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const [trendArrow, setTrendArrow] = useState("➡️");
+
   useEffect(() => {
     const fetchStats = async () => {
       try {
@@ -34,6 +36,17 @@ export default function Dashboard() {
         setAverageRepsThisWeek(data.averageRepsThisWeek);
         setMostCommonExercise(data.mostCommonExercise || "None");
         setLastFiveWorkouts(data.lastFiveWorkouts || []);
+
+        // TREND ARROW LOGIC
+        const monthlyAvg = data.monthlyTotals / 4;
+
+        if (data.weeklyTotals > monthlyAvg) {
+          setTrendArrow("⬆️");
+        } else if (data.weeklyTotals < monthlyAvg) {
+          setTrendArrow("⬇️");
+        } else {
+          setTrendArrow("➡️");
+        }
       } catch (error) {
         console.error("Error fetching stats:", error);
       } finally {
@@ -55,7 +68,9 @@ export default function Dashboard() {
       <div className="stats-grid">
         <div className="stat-card">
           <h3>Weekly Workouts</h3>
-          <p>{weeklyTotals}</p>
+          <p>
+            {weeklyTotals} <span style={{ fontSize: "22px" }}>{trendArrow}</span>
+          </p>
         </div>
 
         <div className="stat-card">
