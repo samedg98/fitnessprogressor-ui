@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Dashboard.css";
 import WeeklyBarChart from "../components/WeeklyBarChart";
 import ExercisePieChart from "../components/ExercisePieChart";
+import MonthlyTrendChart from "../components/MonthlyTrendChart";
 
 export default function Dashboard() {
   const [weeklyTotals, setWeeklyTotals] = useState("--");
@@ -10,6 +11,7 @@ export default function Dashboard() {
   const [averageRepsThisWeek, setAverageRepsThisWeek] = useState("--");
   const [mostCommonExercise, setMostCommonExercise] = useState("--");
   const [lastFiveWorkouts, setLastFiveWorkouts] = useState([]);
+  const [monthlyHistory, setMonthlyHistory] = useState([]); // ⭐ NEW
   const [loading, setLoading] = useState(true);
 
   const [trendArrow, setTrendArrow] = useState("➡️");
@@ -38,6 +40,7 @@ export default function Dashboard() {
         setAverageRepsThisWeek(data.averageRepsThisWeek);
         setMostCommonExercise(data.mostCommonExercise || "None");
         setLastFiveWorkouts(data.lastFiveWorkouts || []);
+        setMonthlyHistory(data.monthlyHistory || []); // ⭐ NEW
 
         // TREND ARROW LOGIC
         const monthlyAvg = data.monthlyTotals / 4;
@@ -122,6 +125,9 @@ export default function Dashboard() {
 
         <h2 style={{ marginTop: "40px" }}>Exercise Distribution</h2>
         <ExercisePieChart lastFiveWorkouts={lastFiveWorkouts} />
+
+        <h2 style={{ marginTop: "40px" }}>Monthly Trend</h2>
+        <MonthlyTrendChart monthlyHistory={monthlyHistory} />
       </div>
     </div>
   );
