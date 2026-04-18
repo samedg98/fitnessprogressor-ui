@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../api/axios";
+import Spinner from "../components/Spinner";
 
 export default function WorkoutHistory() {
   const [workouts, setWorkouts] = useState([]);
@@ -44,7 +45,7 @@ export default function WorkoutHistory() {
     fetchHistory();
   }, []);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Spinner />;
 
   return (
     <div className="page-container">
