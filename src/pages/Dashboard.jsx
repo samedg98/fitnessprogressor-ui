@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Dashboard.css";
 import WeeklyBarChart from "../components/WeeklyBarChart";
+import ExercisePieChart from "../components/ExercisePieChart";
 
 export default function Dashboard() {
   const [weeklyTotals, setWeeklyTotals] = useState("--");
@@ -118,6 +119,9 @@ export default function Dashboard() {
       <div className="charts-container">
         <h2>Weekly Workout Chart</h2>
         <WeeklyBarChart weeklyTotals={weeklyTotals} />
+
+        <h2 style={{ marginTop: "40px" }}>Exercise Distribution</h2>
+        <ExercisePieChart lastFiveWorkouts={lastFiveWorkouts} />
       </div>
     </div>
   );
