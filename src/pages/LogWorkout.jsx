@@ -1,5 +1,6 @@
 import { useState } from "react";
 import api from "../api/axios";
+import Spinner from "../components/Spinner";
 
 export default function LogWorkout() {
   const [exercise, setExercise] = useState("");
@@ -8,10 +9,12 @@ export default function LogWorkout() {
   const [weight, setWeight] = useState("");
   const [date, setDate] = useState("");
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage("");
+    setLoading(true);
 
     try {
       const token = localStorage.getItem("token");
@@ -35,8 +38,12 @@ export default function LogWorkout() {
     } catch (err) {
       console.error(err);
       setMessage("Failed to log workout");
+    } finally {
+      setLoading(false);
     }
   };
+
+  if (loading) return <Spinner />;
 
   return (
     <div style={{ maxWidth: 400, margin: "auto", padding: 20 }}>
