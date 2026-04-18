@@ -88,7 +88,7 @@ export default function LogWorkout() {
           style={{ display: "block", marginBottom: 10, width: "100%" }}
         />
 
-        <button type="submit" style={{ width: "100%" }}>
+        <button type="submit" className="btn-block btn-lg">
           Save Workout
         </button>
       </form>
