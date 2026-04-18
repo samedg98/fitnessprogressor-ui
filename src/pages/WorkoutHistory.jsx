@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import api from "../api/axios";
 import Spinner from "../components/Spinner";
+import ErrorMessage from "../components/ErrorMessage";
 
 export default function WorkoutHistory() {
   const [workouts, setWorkouts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   const fetchHistory = async () => {
     try {
@@ -19,6 +21,7 @@ export default function WorkoutHistory() {
       setWorkouts(response.data);
     } catch (err) {
       console.error("Failed to fetch history:", err);
+      setError("Failed to load workout history.");
     } finally {
       setLoading(false);
     }
@@ -37,7 +40,7 @@ export default function WorkoutHistory() {
       fetchHistory();
     } catch (err) {
       console.error("Failed to delete workout:", err);
-      alert("Failed to delete workout");
+      setError("Failed to delete workout.");
     }
   };
 
@@ -50,6 +53,8 @@ export default function WorkoutHistory() {
   return (
     <div className="page-container">
       <h2>Workout History</h2>
+
+      <ErrorMessage message={error} />
 
       {workouts.length === 0 && <p>No workouts logged yet.</p>}
 
