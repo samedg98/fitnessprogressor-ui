@@ -4,6 +4,7 @@ import WeeklyBarChart from "../components/WeeklyBarChart";
 import ExercisePieChart from "../components/ExercisePieChart";
 import MonthlyTrendChart from "../components/MonthlyTrendChart";
 import Spinner from "../components/Spinner";
+import ErrorMessage from "../components/ErrorMessage";
 
 export default function Dashboard() {
   const [weeklyTotals, setWeeklyTotals] = useState("--");
@@ -16,6 +17,7 @@ export default function Dashboard() {
   const [weeklyBreakdown, setWeeklyBreakdown] = useState([]);
 
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
   const [trendArrow, setTrendArrow] = useState("➡️");
 
   useEffect(() => {
@@ -30,7 +32,7 @@ export default function Dashboard() {
         });
 
         if (!res.ok) {
-          console.error("Failed to fetch stats");
+          setError("Failed to load dashboard data.");
           return;
         }
 
@@ -56,6 +58,7 @@ export default function Dashboard() {
         }
       } catch (error) {
         console.error("Error fetching stats:", error);
+        setError("Failed to load dashboard data.");
       } finally {
         setLoading(false);
       }
@@ -68,6 +71,8 @@ export default function Dashboard() {
 
   return (
     <div className="dashboard-container">
+      <ErrorMessage message={error} />
+
       <h1 className="dashboard-title">Dashboard</h1>
 
       <div className="stats-grid">
