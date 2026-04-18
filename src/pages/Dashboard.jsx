@@ -3,6 +3,7 @@ import "./Dashboard.css";
 import WeeklyBarChart from "../components/WeeklyBarChart";
 import ExercisePieChart from "../components/ExercisePieChart";
 import MonthlyTrendChart from "../components/MonthlyTrendChart";
+import Spinner from "../components/Spinner";
 
 export default function Dashboard() {
   const [weeklyTotals, setWeeklyTotals] = useState("--");
@@ -12,8 +13,6 @@ export default function Dashboard() {
   const [mostCommonExercise, setMostCommonExercise] = useState("--");
   const [lastFiveWorkouts, setLastFiveWorkouts] = useState([]);
   const [monthlyHistory, setMonthlyHistory] = useState([]);
-
-  // NEW: weekly breakdown for bar chart
   const [weeklyBreakdown, setWeeklyBreakdown] = useState([]);
 
   const [loading, setLoading] = useState(true);
@@ -44,8 +43,6 @@ export default function Dashboard() {
         setMostCommonExercise(data.mostCommonExercise || "None");
         setLastFiveWorkouts(data.lastFiveWorkouts || []);
         setMonthlyHistory(data.monthlyHistory || []);
-
-        // NEW: set weekly breakdown for chart
         setWeeklyBreakdown(data.weeklyBreakdown || []);
 
         const monthlyAvg = data.monthlyTotals / 4;
@@ -67,9 +64,7 @@ export default function Dashboard() {
     fetchStats();
   }, []);
 
-  if (loading) {
-    return <h2 style={{ textAlign: "center" }}>Loading Dashboard...</h2>;
-  }
+  if (loading) return <Spinner />;
 
   return (
     <div className="dashboard-container">
@@ -124,9 +119,7 @@ export default function Dashboard() {
         )}
       </div>
 
-      {/* ⭐ PREMIUM TWO-COLUMN CHART LAYOUT */}
       <div className="charts-container">
-
         <div className="chart-card">
           <h2>Weekly Workout Chart</h2>
           <WeeklyBarChart weeklyBreakdown={weeklyBreakdown} />
@@ -141,7 +134,6 @@ export default function Dashboard() {
           <h2>Monthly Trend</h2>
           <MonthlyTrendChart monthlyHistory={monthlyHistory} />
         </div>
-
       </div>
     </div>
   );
