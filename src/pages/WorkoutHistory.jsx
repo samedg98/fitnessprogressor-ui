@@ -5,7 +5,6 @@ export default function WorkoutHistory() {
   const [workouts, setWorkouts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Fetch history
   const fetchHistory = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -24,7 +23,6 @@ export default function WorkoutHistory() {
     }
   };
 
-  // Delete workout
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem("token");
@@ -35,7 +33,6 @@ export default function WorkoutHistory() {
         },
       });
 
-      // Refresh list after deletion
       fetchHistory();
     } catch (err) {
       console.error("Failed to delete workout:", err);
@@ -65,8 +62,7 @@ export default function WorkoutHistory() {
           <p><strong>Date:</strong> {new Date(w.date).toLocaleDateString()}</p>
 
           <button
-            className="delete-btn"
-            style={{ marginTop: 10 }}
+            className="btn-danger btn-sm"
             onClick={() => handleDelete(w.id)}
           >
             Delete
