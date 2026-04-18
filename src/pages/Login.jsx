@@ -1,6 +1,7 @@
 import { useState } from "react";
 import api from "../api/axios";
 import Spinner from "../components/Spinner";
+import ErrorMessage from "../components/ErrorMessage";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -18,7 +19,7 @@ export default function Login() {
       localStorage.setItem("token", res.data.token);
       window.location.href = "/log";
     } catch (err) {
-      setError("Invalid email or password");
+      setError("Invalid email or password.");
     } finally {
       setLoading(false);
     }
@@ -30,7 +31,7 @@ export default function Login() {
     <div style={{ maxWidth: 400, margin: "auto", padding: 20 }}>
       <h2>Login</h2>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      <ErrorMessage message={error} />
 
       <form onSubmit={handleLogin}>
         <input
