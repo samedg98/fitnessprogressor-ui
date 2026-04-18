@@ -11,6 +11,7 @@
   margin-bottom: 25px;
   font-size: 32px;
   font-weight: 700;
+  color: var(--text-h);
 }
 
 /* STATS GRID */
@@ -23,30 +24,34 @@
 
 /* STAT CARD */
 .stat-card {
-  background: #ffffff;
+  background: var(--bg);
   padding: 20px;
   border-radius: 12px;
   text-align: center;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
 }
 
 .stat-card h3 {
   margin-bottom: 10px;
   font-size: 18px;
   font-weight: 600;
+  color: var(--text-h);
 }
 
 .stat-card p {
   font-size: 22px;
   font-weight: 700;
+  color: var(--accent);
 }
 
 /* LAST FIVE WORKOUTS */
 .last-five-container {
-  background: #ffffff;
+  background: var(--bg);
   padding: 25px;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
   margin-bottom: 40px;
 }
 
@@ -58,7 +63,8 @@
 
 .last-five-list li {
   padding: 12px 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
 }
 
 .last-five-list li:last-child {
@@ -81,13 +87,14 @@
 
 /* CHART CARD */
 .chart-card {
-  background: #ffffff;
+  background: var(--bg);
   padding: 25px;
-  padding-top: 50px; /* Prevents chart from overlapping header */
+  padding-top: 50px;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
   position: relative;
-  min-height: 350px; /* Ensures enough room for chart + header */
+  min-height: 350px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -95,12 +102,13 @@
 
 /* CHART HEADERS */
 .chart-card h2 {
-  margin-bottom: 20px; /* Space between header and chart */
+  margin-bottom: 20px;
   text-align: center;
+  color: var(--text-h);
 }
 
-/* FIX PIE CHART ONLY — NOT ALL CHARTS */
+/* PIE CHART ONLY */
 .chart-card.pie-chart-card .recharts-wrapper {
   margin: 0 auto;
-  max-width: 260px; /* Only the pie chart gets this */
+  max-width: 260px;
 }

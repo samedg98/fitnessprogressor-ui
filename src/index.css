@@ -1,16 +1,19 @@
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
+  --text: #4a5568;
+  --text-h: #1a202c;
+  --bg: #ffffff;
+  --border: #e2e8f0;
+  --code-bg: #f7fafc;
+
+  /* TEAL THEME (LIGHT MODE) */
+  --accent: #36a2eb;
+  --accent-bg: rgba(54, 162, 235, 0.12);
+  --accent-border: rgba(54, 162, 235, 0.5);
+  --social-bg: rgba(54, 162, 235, 0.08);
+
   --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px,
-    rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+    rgba(0, 0, 0, 0.08) 0 10px 15px -3px,
+    rgba(0, 0, 0, 0.04) 0 4px 6px -2px;
 
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
   --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
@@ -31,17 +34,20 @@
   }
 }
 
+/* DARK MODE */
 @media (prefers-color-scheme: dark) {
   :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
+    --text: #cbd5e0;
+    --text-h: #f7fafc;
+    --bg: #1a202c;
+    --border: #2d3748;
+    --code-bg: #2d3748;
+
+    --accent: #4bc0c0;
+    --accent-bg: rgba(75, 192, 192, 0.15);
+    --accent-border: rgba(75, 192, 192, 0.5);
+    --social-bg: rgba(75, 192, 192, 0.12);
+
     --shadow:
       rgba(0, 0, 0, 0.4) 0 10px 15px -3px,
       rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
@@ -116,6 +122,9 @@ code {
   background: var(--code-bg);
 }
 
+/* -------------------------------------------------- */
+/* GLOBAL BUTTONS — TEAL THEME                        */
+/* -------------------------------------------------- */
 
 button {
   background: var(--accent);
@@ -137,11 +146,109 @@ button:active {
   transform: scale(0.97);
 }
 
-/* DANGER BUTTON (DELETE) */
 button.delete-btn {
   background: #ff4d4d;
 }
 
 button.delete-btn:hover {
   background: #e60000;
+}
+
+/* -------------------------------------------------- */
+/* INPUTS + FORMS                                     */
+/* -------------------------------------------------- */
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 16px;
+  box-sizing: border-box;
+  transition: 0.2s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-bg);
+}
+
+label {
+  display: block;
+  text-align: left;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+/* -------------------------------------------------- */
+/* NAVBAR                                              */
+/* -------------------------------------------------- */
+
+nav {
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+nav a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 6px;
+  transition: 0.2s ease;
+}
+
+nav a:hover {
+  background: var(--accent-bg);
+  color: var(--accent);
+}
+
+nav a.active {
+  background: var(--accent);
+  color: white;
+}
+
+/* -------------------------------------------------- */
+/* PAGE CONTAINER                                      */
+/* -------------------------------------------------- */
+
+.page-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  text-align: left;
+}
+
+/* -------------------------------------------------- */
+/* WORKOUT HISTORY ITEMS                               */
+/* -------------------------------------------------- */
+
+.workout-item {
+  background: var(--bg);
+  padding: 18px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+}
+
+.workout-item h3 {
+  margin: 0 0 8px;
+  color: var(--text-h);
+}
+
+.workout-item p {
+  color: var(--text);
 }
