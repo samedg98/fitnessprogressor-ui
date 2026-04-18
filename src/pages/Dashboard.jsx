@@ -12,8 +12,11 @@ export default function Dashboard() {
   const [mostCommonExercise, setMostCommonExercise] = useState("--");
   const [lastFiveWorkouts, setLastFiveWorkouts] = useState([]);
   const [monthlyHistory, setMonthlyHistory] = useState([]);
-  const [loading, setLoading] = useState(true);
 
+  // NEW: weekly breakdown for bar chart
+  const [weeklyBreakdown, setWeeklyBreakdown] = useState([]);
+
+  const [loading, setLoading] = useState(true);
   const [trendArrow, setTrendArrow] = useState("➡️");
 
   useEffect(() => {
@@ -41,6 +44,9 @@ export default function Dashboard() {
         setMostCommonExercise(data.mostCommonExercise || "None");
         setLastFiveWorkouts(data.lastFiveWorkouts || []);
         setMonthlyHistory(data.monthlyHistory || []);
+
+        // NEW: set weekly breakdown for chart
+        setWeeklyBreakdown(data.weeklyBreakdown || []);
 
         const monthlyAvg = data.monthlyTotals / 4;
 
@@ -123,7 +129,7 @@ export default function Dashboard() {
 
         <div className="chart-card">
           <h2>Weekly Workout Chart</h2>
-          <WeeklyBarChart weeklyTotals={weeklyTotals} />
+          <WeeklyBarChart weeklyBreakdown={weeklyBreakdown} />
         </div>
 
         <div className="chart-card">
