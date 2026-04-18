@@ -1,6 +1,7 @@
 import { useState } from "react";
 import api from "../api/axios";
 import Spinner from "../components/Spinner";
+import ErrorMessage from "../components/ErrorMessage";
 
 export default function LogWorkout() {
   const [exercise, setExercise] = useState("");
@@ -9,11 +10,13 @@ export default function LogWorkout() {
   const [weight, setWeight] = useState("");
   const [date, setDate] = useState("");
   const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage("");
+    setError("");
     setLoading(true);
 
     try {
@@ -37,7 +40,7 @@ export default function LogWorkout() {
       setDate("");
     } catch (err) {
       console.error(err);
-      setMessage("Failed to log workout");
+      setError("Failed to log workout.");
     } finally {
       setLoading(false);
     }
@@ -49,6 +52,7 @@ export default function LogWorkout() {
     <div style={{ maxWidth: 400, margin: "auto", padding: 20 }}>
       <h2>Log Workout</h2>
 
+      <ErrorMessage message={error} />
       {message && <p>{message}</p>}
 
       <form onSubmit={handleSubmit}>
