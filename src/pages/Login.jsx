@@ -1,14 +1,17 @@
 import { useState } from "react";
 import api from "../api/axios";
+import Spinner from "../components/Spinner";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
+    setLoading(true);
 
     try {
       const res = await api.post("/auth/login", { email, password });
@@ -16,8 +19,12 @@ export default function Login() {
       window.location.href = "/log";
     } catch (err) {
       setError("Invalid email or password");
+    } finally {
+      setLoading(false);
     }
   };
+
+  if (loading) return <Spinner />;
 
   return (
     <div style={{ maxWidth: 400, margin: "auto", padding: 20 }}>
