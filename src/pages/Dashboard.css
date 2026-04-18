@@ -1,0 +1,106 @@
+/* DASHBOARD CONTAINER */
+.dashboard-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px 20px;
+}
+
+/* TITLE */
+.dashboard-title {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+/* STATS GRID */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+/* STAT CARD */
+.stat-card {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.stat-card h3 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.stat-card p {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* LAST FIVE WORKOUTS */
+.last-five-container {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin-bottom: 40px;
+}
+
+.last-five-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 15px;
+}
+
+.last-five-list li {
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.last-five-list li:last-child {
+  border-bottom: none;
+}
+
+/* CHARTS CONTAINER */
+.charts-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+/* TWO-COLUMN CHART LAYOUT ON DESKTOP */
+@media (min-width: 900px) {
+  .charts-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* CHART CARD */
+.chart-card {
+  background: #ffffff;
+  padding: 25px;
+  padding-top: 50px; /* Prevents chart from overlapping header */
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  position: relative;
+  min-height: 350px; /* Ensures enough room for chart + header */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* CHART HEADERS */
+.chart-card h2 {
+  margin-bottom: 20px; /* Space between header and chart */
+  text-align: center;
+}
+
+/* FIX PIE CHART ONLY — NOT ALL CHARTS */
+.chart-card.pie-chart-card .recharts-wrapper {
+  margin: 0 auto;
+  max-width: 260px; /* Only the pie chart gets this */
+}

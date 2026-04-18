@@ -11,7 +11,7 @@ export default function Dashboard() {
   const [averageRepsThisWeek, setAverageRepsThisWeek] = useState("--");
   const [mostCommonExercise, setMostCommonExercise] = useState("--");
   const [lastFiveWorkouts, setLastFiveWorkouts] = useState([]);
-  const [monthlyHistory, setMonthlyHistory] = useState([]); // ⭐ NEW
+  const [monthlyHistory, setMonthlyHistory] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const [trendArrow, setTrendArrow] = useState("➡️");
@@ -40,9 +40,8 @@ export default function Dashboard() {
         setAverageRepsThisWeek(data.averageRepsThisWeek);
         setMostCommonExercise(data.mostCommonExercise || "None");
         setLastFiveWorkouts(data.lastFiveWorkouts || []);
-        setMonthlyHistory(data.monthlyHistory || []); // ⭐ NEW
+        setMonthlyHistory(data.monthlyHistory || []);
 
-        // TREND ARROW LOGIC
         const monthlyAvg = data.monthlyTotals / 4;
 
         if (data.weeklyTotals > monthlyAvg) {
@@ -119,15 +118,24 @@ export default function Dashboard() {
         )}
       </div>
 
+      {/* ⭐ PREMIUM TWO-COLUMN CHART LAYOUT */}
       <div className="charts-container">
-        <h2>Weekly Workout Chart</h2>
-        <WeeklyBarChart weeklyTotals={weeklyTotals} />
 
-        <h2 style={{ marginTop: "40px" }}>Exercise Distribution</h2>
-        <ExercisePieChart lastFiveWorkouts={lastFiveWorkouts} />
+        <div className="chart-card">
+          <h2>Weekly Workout Chart</h2>
+          <WeeklyBarChart weeklyTotals={weeklyTotals} />
+        </div>
 
-        <h2 style={{ marginTop: "40px" }}>Monthly Trend</h2>
-        <MonthlyTrendChart monthlyHistory={monthlyHistory} />
+        <div className="chart-card">
+          <h2>Exercise Distribution</h2>
+          <ExercisePieChart lastFiveWorkouts={lastFiveWorkouts} />
+        </div>
+
+        <div className="chart-card" style={{ gridColumn: "span 2" }}>
+          <h2>Monthly Trend</h2>
+          <MonthlyTrendChart monthlyHistory={monthlyHistory} />
+        </div>
+
       </div>
     </div>
   );
