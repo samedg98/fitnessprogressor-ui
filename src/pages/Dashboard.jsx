@@ -16,6 +16,7 @@ export default function Dashboard() {
   const [monthlyHistory, setMonthlyHistory] = useState([]);
   const [weeklyBreakdown, setWeeklyBreakdown] = useState([]);
   const [strengthProgression, setStrengthProgression] = useState([]);
+  const [consistencyScore, setConsistencyScore] = useState(null);
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -48,6 +49,7 @@ export default function Dashboard() {
         setMonthlyHistory(data.monthlyHistory || []);
         setWeeklyBreakdown(data.weeklyBreakdown || []);
         setStrengthProgression(data.strengthProgression || []);
+        setConsistencyScore(data.consistencyScore || null);
 
         const monthlyAvg = data.monthlyTotals / 4;
 
@@ -70,6 +72,20 @@ export default function Dashboard() {
   }, []);
 
   if (loading) return <Spinner />;
+
+  const renderConsistencyBadge = () => {
+    if (!consistencyScore) return null;
+
+    let circle = "🟢";
+    if (consistencyScore.color === "yellow") circle = "🟡";
+    if (consistencyScore.color === "red") circle = "🔴";
+
+    return (
+      <p>
+        {consistencyScore.score} / 100 — {consistencyScore.label} {circle}
+      </p>
+    );
+  };
 
   return (
     <div className="dashboard-container">
@@ -106,7 +122,6 @@ export default function Dashboard() {
           <p>{mostCommonExercise}</p>
         </div>
 
-        {/* NEW STRENGTH PROGRESSION CARD */}
         <div className="stat-card">
           <h3>Strength Progression</h3>
 
@@ -130,6 +145,15 @@ export default function Dashboard() {
                 );
               })}
             </ul>
+          )}
+        </div>
+
+        <div className="stat-card">
+          <h3>Consistency Score</h3>
+          {consistencyScore ? (
+            renderConsistencyBadge()
+          ) : (
+            <p>Not enough data yet.</p>
           )}
         </div>
       </div>
