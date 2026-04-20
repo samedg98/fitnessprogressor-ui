@@ -15,6 +15,7 @@ export default function Dashboard() {
   const [lastFiveWorkouts, setLastFiveWorkouts] = useState([]);
   const [monthlyHistory, setMonthlyHistory] = useState([]);
   const [weeklyBreakdown, setWeeklyBreakdown] = useState([]);
+  const [strengthProgression, setStrengthProgression] = useState([]);
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -46,6 +47,7 @@ export default function Dashboard() {
         setLastFiveWorkouts(data.lastFiveWorkouts || []);
         setMonthlyHistory(data.monthlyHistory || []);
         setWeeklyBreakdown(data.weeklyBreakdown || []);
+        setStrengthProgression(data.strengthProgression || []);
 
         const monthlyAvg = data.monthlyTotals / 4;
 
@@ -102,6 +104,33 @@ export default function Dashboard() {
         <div className="stat-card">
           <h3>Most Common Exercise</h3>
           <p>{mostCommonExercise}</p>
+        </div>
+
+        {/* NEW STRENGTH PROGRESSION CARD */}
+        <div className="stat-card">
+          <h3>Strength Progression</h3>
+
+          {strengthProgression.length === 0 ? (
+            <p>Not enough data yet.</p>
+          ) : (
+            <ul style={{ listStyle: "none", padding: 0 }}>
+              {strengthProgression.map((item, index) => {
+                const arrow =
+                  item.change > 0
+                    ? "⬆️"
+                    : item.change < 0
+                    ? "⬇️"
+                    : "➡️";
+
+                return (
+                  <li key={index} style={{ marginBottom: "6px" }}>
+                    <strong>{item.exercise}</strong>:{" "}
+                    {item.change} lbs {arrow}
+                  </li>
+                );
+              })}
+            </ul>
+          )}
         </div>
       </div>
 
