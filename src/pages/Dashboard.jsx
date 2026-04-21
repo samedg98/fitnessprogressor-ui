@@ -3,6 +3,7 @@ import "./Dashboard.css";
 import WeeklyBarChart from "../components/WeeklyBarChart";
 import ExercisePieChart from "../components/ExercisePieChart";
 import MonthlyTrendChart from "../components/MonthlyTrendChart";
+import WeeklyVolumeTrendChart from "../components/WeeklyVolumeTrendChart";
 import Spinner from "../components/Spinner";
 import ErrorMessage from "../components/ErrorMessage";
 
@@ -18,6 +19,7 @@ export default function Dashboard() {
   const [strengthProgression, setStrengthProgression] = useState([]);
   const [consistencyScore, setConsistencyScore] = useState(null);
   const [exerciseVariety, setExerciseVariety] = useState(null);
+  const [weeklyVolumeTrend, setWeeklyVolumeTrend] = useState([]);
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -52,6 +54,7 @@ export default function Dashboard() {
         setStrengthProgression(data.strengthProgression || []);
         setConsistencyScore(data.consistencyScore || null);
         setExerciseVariety(data.exerciseVariety || null);
+        setWeeklyVolumeTrend(data.weeklyVolumeTrend || []);
 
         const monthlyAvg = data.monthlyTotals / 4;
 
@@ -211,6 +214,14 @@ export default function Dashboard() {
         <div className="chart-card" style={{ gridColumn: "span 2" }}>
           <h2>Monthly Trend</h2>
           <MonthlyTrendChart monthlyHistory={monthlyHistory} />
+        </div>
+
+        <div
+          className="chart-card"
+          style={{ gridColumn: "span 2", padding: "20px 30px" }}
+        >
+          <h2>Weekly Volume Trend</h2>
+          <WeeklyVolumeTrendChart data={weeklyVolumeTrend} />
         </div>
       </div>
     </div>
