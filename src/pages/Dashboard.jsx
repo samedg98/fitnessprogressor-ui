@@ -17,6 +17,7 @@ export default function Dashboard() {
   const [weeklyBreakdown, setWeeklyBreakdown] = useState([]);
   const [strengthProgression, setStrengthProgression] = useState([]);
   const [consistencyScore, setConsistencyScore] = useState(null);
+  const [exerciseVariety, setExerciseVariety] = useState(null);
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -50,6 +51,7 @@ export default function Dashboard() {
         setWeeklyBreakdown(data.weeklyBreakdown || []);
         setStrengthProgression(data.strengthProgression || []);
         setConsistencyScore(data.consistencyScore || null);
+        setExerciseVariety(data.exerciseVariety || null);
 
         const monthlyAvg = data.monthlyTotals / 4;
 
@@ -83,6 +85,19 @@ export default function Dashboard() {
     return (
       <p>
         {consistencyScore.score} / 100 — {consistencyScore.label} {circle}
+      </p>
+    );
+  };
+
+  const renderExerciseVariety = () => {
+    if (!exerciseVariety) {
+      return <p>Not enough data yet.</p>;
+    }
+
+    return (
+      <p>
+        {exerciseVariety.score} / 100 — {exerciseVariety.label} (
+        {exerciseVariety.uniqueExercises} exercises)
       </p>
     );
   };
@@ -155,6 +170,11 @@ export default function Dashboard() {
           ) : (
             <p>Not enough data yet.</p>
           )}
+        </div>
+
+        <div className="stat-card">
+          <h3>Exercise Variety</h3>
+          {renderExerciseVariety()}
         </div>
       </div>
 
