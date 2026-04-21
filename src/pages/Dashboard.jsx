@@ -21,6 +21,9 @@ export default function Dashboard() {
   const [exerciseVariety, setExerciseVariety] = useState(null);
   const [weeklyVolumeTrend, setWeeklyVolumeTrend] = useState([]);
 
+  // ⭐ NEW STATE
+  const [weeklyStreak, setWeeklyStreak] = useState("--");
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [trendArrow, setTrendArrow] = useState("➡️");
@@ -55,6 +58,9 @@ export default function Dashboard() {
         setConsistencyScore(data.consistencyScore || null);
         setExerciseVariety(data.exerciseVariety || null);
         setWeeklyVolumeTrend(data.weeklyVolumeTrend || []);
+
+        // ⭐ NEW: store weekly streak
+        setWeeklyStreak(data.weeklyStreak || 0);
 
         const monthlyAvg = data.monthlyTotals / 4;
 
@@ -178,6 +184,12 @@ export default function Dashboard() {
         <div className="stat-card">
           <h3>Exercise Variety</h3>
           {renderExerciseVariety()}
+        </div>
+
+        {/* ⭐ NEW WEEKLY STREAK CARD */}
+        <div className="stat-card">
+          <h3>Weekly Streak</h3>
+          <p>{weeklyStreak} week{weeklyStreak === 1 ? "" : "s"}</p>
         </div>
       </div>
 
