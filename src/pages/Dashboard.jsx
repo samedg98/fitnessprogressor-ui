@@ -20,9 +20,10 @@ export default function Dashboard() {
   const [consistencyScore, setConsistencyScore] = useState(null);
   const [exerciseVariety, setExerciseVariety] = useState(null);
   const [weeklyVolumeTrend, setWeeklyVolumeTrend] = useState([]);
+  const [weeklyStreak, setWeeklyStreak] = useState("--");
 
   // ⭐ NEW STATE
-  const [weeklyStreak, setWeeklyStreak] = useState("--");
+  const [recommendations, setRecommendations] = useState([]);
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -58,9 +59,10 @@ export default function Dashboard() {
         setConsistencyScore(data.consistencyScore || null);
         setExerciseVariety(data.exerciseVariety || null);
         setWeeklyVolumeTrend(data.weeklyVolumeTrend || []);
-
-        // ⭐ NEW: store weekly streak
         setWeeklyStreak(data.weeklyStreak || 0);
+
+        // ⭐ NEW: store recommendations
+        setRecommendations(data.recommendations || []);
 
         const monthlyAvg = data.monthlyTotals / 4;
 
@@ -186,10 +188,25 @@ export default function Dashboard() {
           {renderExerciseVariety()}
         </div>
 
-        {/* ⭐ NEW WEEKLY STREAK CARD */}
         <div className="stat-card">
           <h3>Weekly Streak</h3>
           <p>{weeklyStreak} week{weeklyStreak === 1 ? "" : "s"}</p>
+        </div>
+
+        {/* ⭐ NEW RECOMMENDATIONS CARD */}
+        <div className="stat-card">
+          <h3>Recommendations</h3>
+          {recommendations.length === 0 ? (
+            <p>No recommendations yet.</p>
+          ) : (
+            <ul style={{ paddingLeft: "18px" }}>
+              {recommendations.map((rec, index) => (
+                <li key={index} style={{ marginBottom: "6px" }}>
+                  {rec}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </div>
 
