@@ -65,7 +65,7 @@ export default function WorkoutHistory() {
           <p><strong>Sets:</strong> {w.sets}</p>
           <p><strong>Reps:</strong> {w.reps}</p>
           <p><strong>Weight:</strong> {w.weight ?? "N/A"}</p>
-          <p><strong>Date:</strong> {new Date(w.date).toLocaleDateString()}</p>
+          <p><strong>Date:</strong> {w.date}</p>
 
           <button
             className="btn-danger btn-sm"

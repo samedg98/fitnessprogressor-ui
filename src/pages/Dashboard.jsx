@@ -22,8 +22,9 @@ export default function Dashboard() {
   const [weeklyVolumeTrend, setWeeklyVolumeTrend] = useState([]);
   const [weeklyStreak, setWeeklyStreak] = useState("--");
 
-  // ⭐ NEW STATE
   const [recommendations, setRecommendations] = useState([]);
+  const [personalRecords, setPersonalRecords] = useState({});
+  const [showPRs, setShowPRs] = useState(false);
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -34,7 +35,7 @@ export default function Dashboard() {
       try {
         const token = localStorage.getItem("token");
 
-        const res = await fetch("http://localhost:4000/workouts/stats", {
+        const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/workouts/stats`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -60,9 +61,8 @@ export default function Dashboard() {
         setExerciseVariety(data.exerciseVariety || null);
         setWeeklyVolumeTrend(data.weeklyVolumeTrend || []);
         setWeeklyStreak(data.weeklyStreak || 0);
-
-        // ⭐ NEW: store recommendations
         setRecommendations(data.recommendations || []);
+        setPersonalRecords(data.personalRecords || {});
 
         const monthlyAvg = data.monthlyTotals / 4;
 
@@ -193,7 +193,6 @@ export default function Dashboard() {
           <p>{weeklyStreak} week{weeklyStreak === 1 ? "" : "s"}</p>
         </div>
 
-        {/* ⭐ NEW RECOMMENDATIONS CARD */}
         <div className="stat-card">
           <h3>Recommendations</h3>
           {recommendations.length === 0 ? (
@@ -205,6 +204,33 @@ export default function Dashboard() {
                   {rec}
                 </li>
               ))}
+            </ul>
+          )}
+        </div>
+
+        <div className="stat-card">
+          <h3
+            style={{ cursor: "pointer" }}
+            onClick={() => setShowPRs(!showPRs)}
+          >
+            Personal Records {showPRs ? "▲" : "▼"}
+          </h3>
+
+          {showPRs && (
+            <ul style={{ paddingLeft: "18px" }}>
+              {Object.entries(personalRecords).map(
+                ([exercise, pr], index) => (
+                  <li key={index} style={{ marginBottom: "10px" }}>
+                    <strong>{exercise}</strong>
+                    <br />
+                    Max Weight: {pr.maxWeight} lbs
+                    <br />
+                    Max Reps: {pr.maxReps}
+                    <br />
+                    Max Volume: {pr.maxVolume} lbs
+                  </li>
+                )
+              )}
             </ul>
           )}
         </div>
@@ -222,7 +248,7 @@ export default function Dashboard() {
                 <strong>{w.exercise}</strong> — {w.sets} sets × {w.reps} reps @{" "}
                 {w.weight} lbs
                 <br />
-                <small>{new Date(w.date).toLocaleDateString()}</small>
+                <small>{w.date}</small>
               </li>
             ))}
           </ul>
