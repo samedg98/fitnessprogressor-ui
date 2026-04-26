@@ -1,40 +1,33 @@
 import { useState } from "react";
-import { Link } from "react-router-dom"; // <-- ADD THIS
+import { Link, useNavigate } from "react-router-dom";
 import api from "../api/axios";
-import Spinner from "../components/Spinner";
 import ErrorMessage from "../components/ErrorMessage";
 
-export default function Login() {
+export default function Register() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
 
-  const handleLogin = async (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     setError("");
-    setLoading(true);
 
     try {
-      const res = await api.post("/auth/login", { email, password });
-      localStorage.setItem("token", res.data.token);
-      window.location.href = "/log";
+      await api.post("/auth/register", { email, password });
+      navigate("/"); // go back to login
     } catch (err) {
-      setError("Invalid email or password.");
-    } finally {
-      setLoading(false);
+      setError(err.response?.data?.message || "Registration failed");
     }
   };
 
-  if (loading) return <Spinner />;
-
   return (
     <div style={{ maxWidth: 400, margin: "auto", padding: 20 }}>
-      <h2>Login</h2>
+      <h2>Register</h2>
 
       <ErrorMessage message={error} />
 
-      <form onSubmit={handleLogin}>
+      <form onSubmit={handleRegister}>
         <input
           type="email"
           placeholder="Email"
@@ -54,13 +47,12 @@ export default function Login() {
         />
 
         <button type="submit" className="btn-block btn-lg">
-          Login
+          Create Account
         </button>
       </form>
 
-      {/* ADD THIS */}
       <p style={{ marginTop: 15 }}>
-        Don’t have an account? <Link to="/register">Register</Link>
+        Already have an account? <Link to="/">Login</Link>
       </p>
     </div>
   );

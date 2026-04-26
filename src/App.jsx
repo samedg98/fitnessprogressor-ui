@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
+import Register from "./pages/Register"; // <-- ADD THIS
 import LogWorkout from "./pages/LogWorkout";
 import WorkoutHistory from "./pages/WorkoutHistory";
 import Dashboard from "./pages/Dashboard";
@@ -11,8 +12,9 @@ function App() {
     <BrowserRouter>
       <NavBar />
       <Routes>
-        {/* Public Route */}
+        {/* Public Routes */}
         <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} /> {/* <-- ADD THIS */}
 
         {/* Protected Routes */}
         <Route
