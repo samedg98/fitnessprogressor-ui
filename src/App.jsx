@@ -1,9 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
-import Register from "./pages/Register"; // <-- ADD THIS
+import Register from "./pages/Register";
 import LogWorkout from "./pages/LogWorkout";
 import WorkoutHistory from "./pages/WorkoutHistory";
 import Dashboard from "./pages/Dashboard";
+import ProfileSettings from "./pages/ProfileSettings"; 
 import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -14,7 +15,7 @@ function App() {
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<Login />} />
-        <Route path="/register" element={<Register />} /> {/* <-- ADD THIS */}
+        <Route path="/register" element={<Register />} />
 
         {/* Protected Routes */}
         <Route
@@ -40,6 +41,15 @@ function App() {
           element={
             <ProtectedRoute>
               <WorkoutHistory />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <ProfileSettings />
             </ProtectedRoute>
           }
         />

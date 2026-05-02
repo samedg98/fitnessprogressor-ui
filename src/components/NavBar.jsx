@@ -13,6 +13,7 @@ export default function NavBar() {
       <Link to="/dashboard">Dashboard</Link>
       <Link to="/log">Log Workout</Link>
       <Link to="/history">History</Link>
+      <Link to="/profile">Profile</Link> {/* <-- ADDED */}
 
       <button
         className="btn-ghost"
