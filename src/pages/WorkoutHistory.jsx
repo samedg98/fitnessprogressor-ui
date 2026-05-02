@@ -52,29 +52,44 @@ export default function WorkoutHistory() {
 
   return (
     <div className="page-container">
-      <h2>Workout History</h2>
+      <div className="auth-card">
+        <h2 style={{ textAlign: "center", marginBottom: 20 }}>
+          Workout History
+        </h2>
 
-      <ErrorMessage message={error} />
+        <ErrorMessage message={error} />
 
-      {workouts.length === 0 && <p>No workouts logged yet.</p>}
+        {workouts.length === 0 && (
+          <p style={{ textAlign: "center" }}>No workouts logged yet.</p>
+        )}
 
-      {workouts.map((w) => (
-        <div key={w.id} className="workout-item">
-          <h3>{w.exercise}</h3>
+        {workouts.map((w) => (
+          <div key={w.id} className="workout-item">
+            <h3>{w.exercise}</h3>
 
-          <p><strong>Sets:</strong> {w.sets}</p>
-          <p><strong>Reps:</strong> {w.reps}</p>
-          <p><strong>Weight:</strong> {w.weight ?? "N/A"}</p>
-          <p><strong>Date:</strong> {w.date}</p>
+            <p>
+              <strong>Sets:</strong> {w.sets}
+            </p>
+            <p>
+              <strong>Reps:</strong> {w.reps}
+            </p>
+            <p>
+              <strong>Weight:</strong> {w.weight ?? "N/A"}
+            </p>
+            <p>
+              <strong>Date:</strong> {w.date}
+            </p>
 
-          <button
-            className="btn-danger btn-sm"
-            onClick={() => handleDelete(w.id)}
-          >
-            Delete
-          </button>
-        </div>
-      ))}
+            <button
+              className="btn-danger btn-sm"
+              onClick={() => handleDelete(w.id)}
+              style={{ marginTop: 10 }}
+            >
+              Delete
+            </button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
