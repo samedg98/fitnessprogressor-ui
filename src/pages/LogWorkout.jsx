@@ -49,60 +49,76 @@ export default function LogWorkout() {
   if (loading) return <Spinner />;
 
   return (
-    <div style={{ maxWidth: 400, margin: "auto", padding: 20 }}>
-      <h2>Log Workout</h2>
+    <div className="page-container">
+      <div className="auth-card">
+        <h2 style={{ textAlign: "center", marginBottom: 20 }}>Log Workout</h2>
 
-      <ErrorMessage message={error} />
-      {message && <p>{message}</p>}
+        <ErrorMessage message={error} />
+        {message && (
+          <p style={{ color: "var(--accent)", marginBottom: 20 }}>
+            {message}
+          </p>
+        )}
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Exercise"
-          value={exercise}
-          onChange={(e) => setExercise(e.target.value)}
-          required
-          style={{ display: "block", marginBottom: 10, width: "100%" }}
-        />
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label>Exercise</label>
+            <input
+              type="text"
+              placeholder="e.g., Bench Press"
+              value={exercise}
+              onChange={(e) => setExercise(e.target.value)}
+              required
+            />
+          </div>
 
-        <input
-          type="number"
-          placeholder="Sets"
-          value={sets}
-          onChange={(e) => setSets(e.target.value)}
-          required
-          style={{ display: "block", marginBottom: 10, width: "100%" }}
-        />
+          <div className="form-group">
+            <label>Sets</label>
+            <input
+              type="number"
+              placeholder="e.g., 4"
+              value={sets}
+              onChange={(e) => setSets(e.target.value)}
+              required
+            />
+          </div>
 
-        <input
-          type="number"
-          placeholder="Reps"
-          value={reps}
-          onChange={(e) => setReps(e.target.value)}
-          required
-          style={{ display: "block", marginBottom: 10, width: "100%" }}
-        />
+          <div className="form-group">
+            <label>Reps</label>
+            <input
+              type="number"
+              placeholder="e.g., 10"
+              value={reps}
+              onChange={(e) => setReps(e.target.value)}
+              required
+            />
+          </div>
 
-        <input
-          type="number"
-          placeholder="Weight (lbs)"
-          value={weight}
-          onChange={(e) => setWeight(e.target.value)}
-          style={{ display: "block", marginBottom: 10, width: "100%" }}
-        />
+          <div className="form-group">
+            <label>Weight (lbs)</label>
+            <input
+              type="number"
+              placeholder="e.g., 135"
+              value={weight}
+              onChange={(e) => setWeight(e.target.value)}
+            />
+          </div>
 
-        <input
-          type="date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-          required
-          style={{ display: "block", marginBottom: 10, width: "100%" }}
-        />
+          <div className="form-group">
+            <label>Date</label>
+            <input
+              type="date"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+              required
+            />
+          </div>
 
-        <button type="submit" className="btn-block btn-lg">
-          Save Workout
-        </button>
-      </form>
+          <button type="submit" className="btn-block btn-lg">
+            Save Workout
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
