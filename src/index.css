@@ -58,9 +58,22 @@
   }
 }
 
+/* -------------------------------------------------- */
+/* GLOBAL BACKGROUND (GRADIENT)                       */
+/* -------------------------------------------------- */
+
 body {
   margin: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(54, 162, 235, 0.08),
+    rgba(54, 162, 235, 0.02)
+  );
 }
+
+/* -------------------------------------------------- */
+/* ROOT WRAPPER                                        */
+/* -------------------------------------------------- */
 
 #root {
   width: 1126px;
@@ -73,6 +86,10 @@ body {
   flex-direction: column;
   box-sizing: border-box;
 }
+
+/* -------------------------------------------------- */
+/* TYPOGRAPHY                                          */
+/* -------------------------------------------------- */
 
 h1,
 h2 {
@@ -123,7 +140,7 @@ code {
 }
 
 /* -------------------------------------------------- */
-/* GLOBAL BUTTONS — TEAL THEME (ORIGINAL)             */
+/* BUTTONS                                             */
 /* -------------------------------------------------- */
 
 button {
@@ -146,6 +163,10 @@ button:active {
   transform: scale(0.97);
 }
 
+button + button {
+  margin-left: 10px;
+}
+
 button.delete-btn {
   background: #ff4d4d;
 }
@@ -153,109 +174,6 @@ button.delete-btn {
 button.delete-btn:hover {
   background: #e60000;
 }
-
-/* -------------------------------------------------- */
-/* INPUTS + FORMS                                     */
-/* -------------------------------------------------- */
-
-input,
-select,
-textarea {
-  width: 100%;
-  padding: 10px 14px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  background: var(--bg);
-  color: var(--text);
-  font-size: 16px;
-  box-sizing: border-box;
-  transition: 0.2s ease;
-}
-
-input:focus,
-select:focus,
-textarea:focus {
-  outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-bg);
-}
-
-label {
-  display: block;
-  text-align: left;
-  margin-bottom: 6px;
-  font-weight: 600;
-  color: var(--text-h);
-}
-
-/* -------------------------------------------------- */
-/* NAVBAR                                              */
-/* -------------------------------------------------- */
-
-nav {
-  background: var(--bg);
-  border-bottom: 1px solid var(--border);
-  padding: 12px 20px;
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
-
-nav a {
-  color: var(--text);
-  text-decoration: none;
-  font-weight: 600;
-  padding: 8px 14px;
-  border-radius: 6px;
-  transition: 0.2s ease;
-}
-
-nav a:hover {
-  background: var(--accent-bg);
-  color: var(--accent);
-}
-
-nav a.active {
-  background: var(--accent);
-  color: white;
-}
-
-/* -------------------------------------------------- */
-/* PAGE CONTAINER                                      */
-/* -------------------------------------------------- */
-
-.page-container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 30px 20px;
-  text-align: left;
-}
-
-/* -------------------------------------------------- */
-/* WORKOUT HISTORY ITEMS                               */
-/* -------------------------------------------------- */
-
-.workout-item {
-  background: var(--bg);
-  padding: 18px;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow);
-  margin-bottom: 16px;
-}
-
-.workout-item h3 {
-  margin: 0 0 8px;
-  color: var(--text-h);
-}
-
-.workout-item p {
-  color: var(--text);
-}
-
-/* -------------------------------------------------- */
-/* PREMIUM BUTTON SYSTEM (EXTENDED)                   */
-/* -------------------------------------------------- */
 
 /* Disabled */
 button:disabled {
@@ -311,4 +229,160 @@ button.btn-lg {
 /* Full Width */
 button.btn-block {
   width: 100%;
+}
+
+/* -------------------------------------------------- */
+/* INPUTS + FORMS                                      */
+/* -------------------------------------------------- */
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 16px;
+  box-sizing: border-box;
+  transition: 0.2s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-bg);
+}
+
+label {
+  display: block;
+  text-align: left;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+/* -------------------------------------------------- */
+/* NAVBAR                                              */
+/* -------------------------------------------------- */
+
+nav {
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+nav a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 6px;
+  transition: 0.2s ease;
+}
+
+nav a:hover {
+  background: var(--accent-bg);
+  color: var(--accent);
+}
+
+nav a.active {
+  background: var(--accent);
+  color: white;
+}
+
+/* -------------------------------------------------- */
+/* PAGE CONTAINER                                      */
+/* -------------------------------------------------- */
+
+.page-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* -------------------------------------------------- */
+/* AUTH CARD                                           */
+/* -------------------------------------------------- */
+
+.auth-card {
+  background: var(--bg);
+  padding: 32px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  max-width: 420px;
+  margin: 40px auto;
+}
+
+/* -------------------------------------------------- */
+/* WORKOUT HISTORY ITEMS                               */
+/* -------------------------------------------------- */
+
+.workout-item {
+  background: var(--bg);
+  padding: 18px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+}
+
+.workout-item h3 {
+  margin: 0 0 8px;
+  color: var(--text-h);
+}
+
+.workout-item p {
+  color: var(--text);
+}
+
+/* -------------------------------------------------- */
+/* GLOBAL WATERMARK BACKGROUND (DUMBBELL ICON)        */
+/* -------------------------------------------------- */
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 50%;
+  left: 40px;
+  width: 160px;
+  height: 160px;
+  background-image: url("/dumbbell.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.06;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  top: 50%;
+  right: 40px;
+  width: 160px;
+  height: 160px;
+  background-image: url("/dumbbell.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.06;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: -1;
 }

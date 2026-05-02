@@ -30,41 +30,43 @@ export default function Login() {
 
   return (
     <div className="page-container">
-      <h2>Login</h2>
+      <div className="auth-card">
+        <h2 style={{ textAlign: "center", marginBottom: 20 }}>Login</h2>
 
-      <ErrorMessage message={error} />
+        <ErrorMessage message={error} />
 
-      <form onSubmit={handleLogin}>
-        <div className="form-group">
-          <label>Email</label>
-          <input
-            type="email"
-            placeholder="Enter your email..."
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
+        <form onSubmit={handleLogin}>
+          <div className="form-group">
+            <label>Email</label>
+            <input
+              type="email"
+              placeholder="Enter your email..."
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
 
-        <div className="form-group">
-          <label>Password</label>
-          <input
-            type="password"
-            placeholder="Enter your password..."
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
+          <div className="form-group">
+            <label>Password</label>
+            <input
+              type="password"
+              placeholder="Enter your password..."
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
 
-        <button type="submit" className="btn-block btn-lg">
-          Login
-        </button>
-      </form>
+          <button type="submit" className="btn-block btn-lg">
+            Login
+          </button>
+        </form>
 
-      <p style={{ marginTop: 20 }}>
-        Don’t have an account? <Link to="/register">Register</Link>
-      </p>
+        <p style={{ marginTop: 20, textAlign: "center" }}>
+          Don’t have an account? <Link to="/register">Register</Link>
+        </p>
+      </div>
     </div>
   );
 }
