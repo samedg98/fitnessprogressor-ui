@@ -22,38 +22,44 @@ export default function Register() {
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: "auto", padding: 20 }}>
-      <h2>Register</h2>
+    <div className="page-container">
+      <div className="auth-card">
+        <h2 style={{ textAlign: "center", marginBottom: 20 }}>Create Account</h2>
 
-      <ErrorMessage message={error} />
+        <ErrorMessage message={error} />
 
-      <form onSubmit={handleRegister}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          style={{ display: "block", marginBottom: 10, width: "100%" }}
-        />
+        <form onSubmit={handleRegister}>
+          <div className="form-group">
+            <label>Email</label>
+            <input
+              type="email"
+              placeholder="Enter your email..."
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          style={{ display: "block", marginBottom: 10, width: "100%" }}
-        />
+          <div className="form-group">
+            <label>Password</label>
+            <input
+              type="password"
+              placeholder="Create a password..."
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
 
-        <button type="submit" className="btn-block btn-lg">
-          Create Account
-        </button>
-      </form>
+          <button type="submit" className="btn-block btn-lg">
+            Create Account
+          </button>
+        </form>
 
-      <p style={{ marginTop: 15 }}>
-        Already have an account? <Link to="/">Login</Link>
-      </p>
+        <p style={{ marginTop: 20, textAlign: "center" }}>
+          Already have an account? <Link to="/">Login</Link>
+        </p>
+      </div>
     </div>
   );
 }
