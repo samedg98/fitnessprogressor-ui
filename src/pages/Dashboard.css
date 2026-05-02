@@ -17,15 +17,15 @@
 /* STATS GRID */
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
   margin-bottom: 40px;
 }
 
 /* STAT CARD */
 .stat-card {
   background: var(--bg);
-  padding: 20px;
+  padding: 22px;
   border-radius: 12px;
   text-align: center;
   box-shadow: var(--shadow);
@@ -45,8 +45,27 @@
   color: var(--accent);
 }
 
+/* CLEAN LISTS (used for PRs, recommendations, etc.) */
+.list-clean {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.list-clean li {
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+/* CLICKABLE HEADERS (PR dropdown) */
+.clickable {
+  cursor: pointer;
+  user-select: none;
+}
+
 /* LAST FIVE WORKOUTS */
-.last-five-container {
+.last-five-container,
+.auth-card {
   background: var(--bg);
   padding: 25px;
   border-radius: 12px;
@@ -88,8 +107,7 @@
 /* CHART CARD */
 .chart-card {
   background: var(--bg);
-  padding: 25px;
-  padding-top: 50px;
+  padding: 30px;
   border-radius: 12px;
   box-shadow: var(--shadow);
   border: 1px solid var(--border);
