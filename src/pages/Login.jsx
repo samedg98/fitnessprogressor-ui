@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom"; // <-- ADD THIS
+import { Link } from "react-router-dom";
 import api from "../api/axios";
 import Spinner from "../components/Spinner";
 import ErrorMessage from "../components/ErrorMessage";
@@ -29,37 +29,40 @@ export default function Login() {
   if (loading) return <Spinner />;
 
   return (
-    <div style={{ maxWidth: 400, margin: "auto", padding: 20 }}>
+    <div className="page-container">
       <h2>Login</h2>
 
       <ErrorMessage message={error} />
 
       <form onSubmit={handleLogin}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          style={{ display: "block", marginBottom: 10, width: "100%" }}
-        />
+        <div className="form-group">
+          <label>Email</label>
+          <input
+            type="email"
+            placeholder="Enter your email..."
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          style={{ display: "block", marginBottom: 10, width: "100%" }}
-        />
+        <div className="form-group">
+          <label>Password</label>
+          <input
+            type="password"
+            placeholder="Enter your password..."
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
 
         <button type="submit" className="btn-block btn-lg">
           Login
         </button>
       </form>
 
-      {/* ADD THIS */}
-      <p style={{ marginTop: 15 }}>
+      <p style={{ marginTop: 20 }}>
         Don’t have an account? <Link to="/register">Register</Link>
       </p>
     </div>
