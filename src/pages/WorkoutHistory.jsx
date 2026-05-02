@@ -8,6 +8,14 @@ export default function WorkoutHistory() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  // Editing state
+  const [editingId, setEditingId] = useState(null);
+  const [editExercise, setEditExercise] = useState("");
+  const [editSets, setEditSets] = useState("");
+  const [editReps, setEditReps] = useState("");
+  const [editWeight, setEditWeight] = useState("");
+  const [editDate, setEditDate] = useState("");
+
   const fetchHistory = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -44,6 +52,52 @@ export default function WorkoutHistory() {
     }
   };
 
+  const startEditing = (workout) => {
+    setEditingId(workout.id);
+    setEditExercise(workout.exercise);
+    setEditSets(workout.sets);
+    setEditReps(workout.reps);
+    setEditWeight(workout.weight ?? "");
+    setEditDate(workout.date);
+  };
+
+  const cancelEditing = () => {
+    setEditingId(null);
+    setEditExercise("");
+    setEditSets("");
+    setEditReps("");
+    setEditWeight("");
+    setEditDate("");
+  };
+
+  const saveEdit = async (id) => {
+    try {
+      const token = localStorage.getItem("token");
+
+      await api.put(
+        `/workouts/${id}`,
+        {
+          exercise: editExercise,
+          sets: editSets,
+          reps: editReps,
+          weight: editWeight,
+          date: editDate,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      cancelEditing();
+      fetchHistory();
+    } catch (err) {
+      console.error("Failed to update workout:", err);
+      setError("Failed to update workout.");
+    }
+  };
+
   useEffect(() => {
     fetchHistory();
   }, []);
@@ -65,28 +119,108 @@ export default function WorkoutHistory() {
 
         {workouts.map((w) => (
           <div key={w.id} className="workout-item">
-            <h3>{w.exercise}</h3>
+            {editingId === w.id ? (
+              <>
+                <h3>Edit Workout</h3>
 
-            <p>
-              <strong>Sets:</strong> {w.sets}
-            </p>
-            <p>
-              <strong>Reps:</strong> {w.reps}
-            </p>
-            <p>
-              <strong>Weight:</strong> {w.weight ?? "N/A"}
-            </p>
-            <p>
-              <strong>Date:</strong> {w.date}
-            </p>
+                <div className="form-group">
+                  <label>Exercise</label>
+                  <input
+                    type="text"
+                    value={editExercise}
+                    onChange={(e) => setEditExercise(e.target.value)}
+                    required
+                  />
+                </div>
 
-            <button
-              className="btn-danger btn-sm"
-              onClick={() => handleDelete(w.id)}
-              style={{ marginTop: 10 }}
-            >
-              Delete
-            </button>
+                <div className="form-group">
+                  <label>Sets</label>
+                  <input
+                    type="number"
+                    value={editSets}
+                    onChange={(e) => setEditSets(e.target.value)}
+                    required
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label>Reps</label>
+                  <input
+                    type="number"
+                    value={editReps}
+                    onChange={(e) => setEditReps(e.target.value)}
+                    required
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label>Weight (lbs)</label>
+                  <input
+                    type="number"
+                    value={editWeight}
+                    onChange={(e) => setEditWeight(e.target.value)}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label>Date</label>
+                  <input
+                    type="date"
+                    value={editDate}
+                    onChange={(e) => setEditDate(e.target.value)}
+                    required
+                  />
+                </div>
+
+                <button
+                  className="btn-block btn-lg"
+                  onClick={() => saveEdit(w.id)}
+                >
+                  Save Changes
+                </button>
+
+                <button
+                  className="btn-ghost btn-sm"
+                  style={{ marginTop: 10 }}
+                  onClick={cancelEditing}
+                >
+                  Cancel
+                </button>
+              </>
+            ) : (
+              <>
+                <h3>{w.exercise}</h3>
+
+                <p>
+                  <strong>Sets:</strong> {w.sets}
+                </p>
+                <p>
+                  <strong>Reps:</strong> {w.reps}
+                </p>
+                <p>
+                  <strong>Weight:</strong> {w.weight ?? "N/A"}
+                </p>
+                <p>
+                  <strong>Date:</strong> {w.date}
+                </p>
+
+                <div style={{ display: "flex", gap: "10px", marginTop: 10 }}>
+                  <button
+                    className="btn-outline btn-sm"
+                    onClick={() => startEditing(w)}
+                  >
+                    Edit
+                  </button>
+
+                  <button
+                    className="btn-danger btn-sm"
+                    onClick={() => handleDelete(w.id)}
+                  >
+                    Delete
+                  </button>
+                </div>
+              </>
+            )}
           </div>
         ))}
       </div>
