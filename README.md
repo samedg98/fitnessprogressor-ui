@@ -155,16 +155,12 @@ VITE_API_BASE_URL=https://fitnessprogressor-backend.onrender.com
 
 ## 📸 Screenshots
 
-(Add these after taking them)
-
-- Login Page  
-- Register Page  
-- Dashboard  
-- Workout List  
-- Add Workout  
-- Edit Workout  
-- Profile Settings  
-- Live Site Screenshot  
+- Login Page // screenshots/Login Screenshot.png
+- Register Page  //  screenshots/Register Screenshot.png
+- Dashboard  //  screenshots/Dashboard Screenshot 1.png , screenshots/Dashboard Screenshot 2.png
+- Workout History List  // screenshots/History Screenshot.png
+- Log Workout // screenshots/Log Workout Screenshot.png
+- Profile Settings  //  screenshots/Profile Settings Screenshot.png
 
 ---
 
