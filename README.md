@@ -9,6 +9,8 @@ A full‑stack fitness tracking application that helps users log workouts, track
 **Frontend (Netlify):**  
 https://delicate-liger-d20157.netlify.app/
 
+**NEW LINK**: https://fitnessprogressor.netlify.app
+
 **Backend API (Render):**  
 https://fitnessprogressor-backend.onrender.com/
 
